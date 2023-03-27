@@ -5,6 +5,7 @@ var target = Vector2.ZERO
 
 var interactable_object
 var in_inventory: bool
+var dialogueActive: bool
 @export var interacting = false
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
@@ -26,7 +27,7 @@ func _physics_process(_delta):
 	else:
 		useItemSprite.hide()
 		
-	if Input.is_action_just_pressed("LeftMouseClick") and !in_inventory:
+	if Input.is_action_just_pressed("LeftMouseClick") and !in_inventory and !dialogueActive:
 		target = get_global_mouse_position()
 		navigation_agent.set_target_position(target)
 		navigation_agent.set_debug_enabled(true)
@@ -50,12 +51,10 @@ func _physics_process(_delta):
 			interacting = false
 			interactable_object.Marker.hide()
 			
-	
-			
 func execute(interactable_object):
 	match interactable_object.Interact_Type:
 		"print_text" : print(interactable_object.Interact_Value)
 		"pickup" : PlayerInventory.add_item(interactable_object)
 		"use" : PlayerInventory.use_Item(interactable_object)
-		"DialogueBox" : DialogueManager.showDialogueBox(self, interactable_object)
-		"DialogueBubble" : DialogueManager.showDialogueBubble(self, interactable_object)
+		"DialogueBox" : DialogueManager.showDialogueBox(interactable_object)
+		"DialogueBubble" : DialogueManager.showDialogueBubble(interactable_object.Examine_Text)

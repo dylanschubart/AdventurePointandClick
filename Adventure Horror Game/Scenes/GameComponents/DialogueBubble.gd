@@ -1,8 +1,7 @@
-extends ColorRect
+extends TextureRect
 
 @export var dialogPath = ""
 @export var textSpeed = 0.05
-@onready var player = get_tree().root.get_node("/root/Test/Player")
 
 var dialog
  
@@ -13,22 +12,13 @@ func _ready():
 	get_parent().hide()
 
 func start():
-	player.dialogueActive = true
 	phraseNum = 0
 	get_parent().show()
 	$Timer.wait_time = textSpeed
+	$TimerDisappear.start()
 	dialog = getDialog()
 	assert(dialog, "Dialog not found")
 	nextPhrase()
-	$Indicator/AnimationPlayer.play("Indicator")
-	
-func _process(_delta):
-	$Indicator.visible = finished
-	if Input.is_action_just_pressed("RightMouseClick"):
-		if finished:
-			nextPhrase()
-		else:
-			$Text.visible_characters = len($Text.text)
  
 func getDialog() -> Array:
 	var f = FileAccess.open(dialogPath,FileAccess.READ)
@@ -47,22 +37,15 @@ func getDialog() -> Array:
 func nextPhrase() -> void:
 	if phraseNum >= len(dialog):
 		get_parent().hide()
-		player.dialogueActive = false
 		return
 	
 	finished = false
 	
-	$Name.bbcode_text = dialog[phraseNum]["Name"]
 	$Text.bbcode_text = dialog[phraseNum]["Text"]
 	
 	$Text.visible_characters = 0
 	
 	var f = FileAccess.open(dialogPath,FileAccess.READ)
-	var img = "res://Sprites/Portraits/" + dialog[phraseNum]["Name"] + dialog[phraseNum]["Emotion"] + ".png"
-	print(img)
-	if f.file_exists(img):
-		$Portrait.texture = load(img)
-	else: $Portrait.texture = null
 	
 	while $Text.visible_characters < len($Text.text):
 		$Text.visible_characters += 1
@@ -73,3 +56,7 @@ func nextPhrase() -> void:
 	finished = true
 	phraseNum += 1
 	return
+
+
+func _on_timer_disappear_timeout():
+	get_parent().hide()

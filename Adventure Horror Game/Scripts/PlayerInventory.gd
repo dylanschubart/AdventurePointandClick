@@ -18,6 +18,7 @@ func add_item(Interactable):
 		if inventory.has(i) == false:
 			inventory[i] = {"name" : Interactable.Interact_Name, "ExamineText": Interactable.Examine_Text}
 			Interactable.queue_free()
+			DialogueManager.showDialogueBubble(Interactable.Examine_Text)
 			return
 
 func remove_item(slotIndex):
@@ -38,15 +39,16 @@ func select_item(index):
 
 func unselect_item():
 	active_item_slot = null
+	active_item = null
 	usingItem = false
 
 func use_Item(interactable_object):
 	if active_item == null:
-		print(interactable_object.Examine_Text)
+		DialogueManager.showDialogueBubble(interactable_object.Examine_Text)
 	else:
 		match interactable_object.Interact_Name:
-			"Candle" : interactable_object.candle(active_item["name"], active_item_slot)
-			"Bone" : interactable_object.bone(active_item["name"], active_item_slot)
+			"Candle" : interactable_object.candle(active_item["name"],interactable_object, active_item_slot)
+			"Bone" : interactable_object.bone(active_item["name"],interactable_object, active_item_slot)
 
 func examine_item(index):
 	var examineItemText

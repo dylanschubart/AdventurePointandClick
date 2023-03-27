@@ -31,16 +31,16 @@ func _on_input_event(_viewport, _event, _shape_idx):
 		Marker.show()
 		Marker.global_position = current_interaction.position + Vector2(0, -20)
 
-func candle(active_item_name, active_item_slot):
-	if active_item_name == "Note":
-		print("burned note")
+func candle(active_item, interactable_object, active_item_slot):
+	if active_item == "Note":
+		DialogueManager.showDialogueBubble("res://ExamineText/ThatWorked.json")
 		PlayerInventory.remove_item(active_item_slot)
 	else:
-		print("that doesn't work")
+		DialogueManager.showDialogueBubble(interactable_object.Interact_Value)
 		
-func bone(active_item_name, active_item_slot):
-	if active_item_name == "Duck":
-		print("Duck ate Bone")
+func bone(active_item,interactable_object, active_item_slot):
+	if active_item == "Duck":
+		DialogueManager.showDialogueBubble("res://ExamineText/ThatWorked.json")
 		PlayerInventory.remove_item(active_item_slot)
 	else:
-		print("that doesn't work")
+		DialogueManager.showDialogueBubble(interactable_object.Interact_Value)

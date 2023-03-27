@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://pnwofaq61h2v"]
+[gd_scene load_steps=10 format=3 uid="uid://pnwofaq61h2v"]
 
 [ext_resource type="PackedScene" uid="uid://bielcixa5wuup" path="res://Scenes/environment.tscn" id="1_74owe"]
 [ext_resource type="PackedScene" uid="uid://bnmrawfsklmac" path="res://Scenes/GameComponents/player.tscn" id="2_3uuok"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://b5583mh4ii6lt" path="res://Sprites/TopDownHouse_SmallItems.png" id="4_25811"]
 [ext_resource type="Script" path="res://Scripts/UserInterface.gd" id="5_37kt8"]
 [ext_resource type="PackedScene" uid="uid://vlfa0umhjtky" path="res://Scenes/GameComponents/inventory.tscn" id="5_ucsgv"]
+[ext_resource type="PackedScene" uid="uid://c6xmrmvm3ncx3" path="res://Scenes/GameComponents/DialogueBox.tscn" id="7_5x1gc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_velaq"]
+size = Vector2(19, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lg3wj"]
 size = Vector2(10, 9)
@@ -24,8 +26,8 @@ position = Vector2(232, 176)
 Interact_Name = "Bone"
 Interact_label = "Bone"
 Interact_Type = "use"
-Interact_Value = "Duck"
-Examine_Text = "Why is there a dog bone here?"
+Interact_Value = "res://ExamineText/UseDoesntWork.json"
+Examine_Text = "res://ExamineText/Bone.json"
 
 [node name="CollisionShape2D" parent="Interactions/Interactable_Bone" index="0"]
 position = Vector2(0.5, 0)
@@ -51,8 +53,8 @@ position = Vector2(208, 142)
 Interact_Name = "Duck"
 Interact_label = "Duck"
 Interact_Type = "pickup"
-Interact_Value = "Duck has been picked up"
-Examine_Text = "It's my favorite Duck"
+Interact_Value = "Ducky is my friend"
+Examine_Text = "res://ExamineText/Duck.json"
 
 [node name="CollisionShape2D" parent="Interactions/Interactable_Duck" index="0"]
 position = Vector2(0, -0.5)
@@ -74,8 +76,8 @@ position = Vector2(197, 126)
 Interact_Name = "Candle"
 Interact_label = "Candle"
 Interact_Type = "use"
-Interact_Value = "Note"
-Examine_Text = "This candle is really hot"
+Interact_Value = "res://ExamineText/UseDoesntWork.json"
+Examine_Text = "res://ExamineText/Candle.json"
 
 [node name="CollisionShape2D" parent="Interactions/Interactable_candle" index="0"]
 shape = SubResource("RectangleShape2D_velaq")
@@ -98,8 +100,8 @@ position = Vector2(176, 136)
 Interact_Name = "Note"
 Interact_label = "Note"
 Interact_Type = "DialogueBubble"
-Interact_Value = "DialogueBox"
-Examine_Text = "DialogueBubble"
+Interact_Value = "res://ExamineText/Note.json"
+Examine_Text = "res://ExamineText/Note.json"
 
 [node name="CollisionShape2D" parent="Interactions/Interactable_Note2" index="0"]
 position = Vector2(0.5, 0)
@@ -124,11 +126,11 @@ position = Vector2(284, 65)
 Interact_Name = "Clock"
 Interact_label = "Clock"
 Interact_Type = "DialogueBox"
-Interact_Value = "res://Dialog/Dialog1.json"
-Examine_Text = "Why are there two clocks?"
+Interact_Value = "res://Dialogue/Dialog1.json"
+Examine_Text = "res://ExamineText/Clock.json"
 
 [node name="CollisionShape2D" parent="Interactions/Interactable_Clock" index="0"]
-position = Vector2(-1, -3)
+position = Vector2(-1.5, -4)
 shape = SubResource("RectangleShape2D_velaq")
 
 [node name="Sprite2D" parent="Interactions/Interactable_Clock" index="1"]
@@ -148,6 +150,7 @@ grow_horizontal = 2
 
 [node name="Player" parent="." instance=ExtResource("2_3uuok")]
 position = Vector2(236, 142)
+interacting = false
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 script = ExtResource("5_37kt8")
@@ -157,6 +160,8 @@ offset_left = 160.0
 offset_top = 248.0
 offset_right = 160.0
 offset_bottom = 248.0
+
+[node name="DialogueBox" parent="UserInterface" instance=ExtResource("7_5x1gc")]
 
 [node name="ItemMarker" type="Sprite2D" parent="."]
 visible = false
