@@ -1,0 +1,4 @@
+[
+	{"Name":"TestBoy", "Emotion":"Happy","Text":"I'm a Test Text Happy"},
+	{"Name":"TestBoy", "Emotion":"Sad","Text":"[shake rate=5 level=10]I'm a Test Text Sad[/shake]"}	
+]

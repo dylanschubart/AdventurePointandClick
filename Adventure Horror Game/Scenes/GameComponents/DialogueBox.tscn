@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6xmrmvm3ncx3"]
+
+[ext_resource type="Texture2D" uid="uid://c7urdxb58nbi4" path="res://Sprites/Portraits/TestBoyHappy.png" id="1_csm77"]
+[ext_resource type="Script" path="res://Scenes/GameComponents/Dialog Box.gd" id="2_quydm"]
+
+[sub_resource type="Animation" id="Animation_tlahd"]
+resource_name = "Indicator"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(320, 72), Vector2(320, 69)]
+}
+
+[sub_resource type="Animation" id="Animation_a7m5c"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pxxql"]
+_data = {
+"Indicator": SubResource("Animation_tlahd"),
+"RESET": SubResource("Animation_a7m5c")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogBox" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 176.0
+offset_right = 408.0
+offset_bottom = 269.0
+script = ExtResource("2_quydm")
+
+[node name="Name" type="RichTextLabel" parent="DialogBox"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 32.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Name"
+
+[node name="Text" type="RichTextLabel" parent="DialogBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 328.0
+offset_bottom = 72.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Text"
+
+[node name="Indicator" type="Polygon2D" parent="DialogBox"]
+position = Vector2(320, 72)
+color = Color(0.807843, 0.0352941, 0.54902, 1)
+polygon = PackedVector2Array(0, 16, 8, 8, -8, 8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogBox/Indicator"]
+libraries = {
+"": SubResource("AnimationLibrary_pxxql")
+}
+
+[node name="Timer" type="Timer" parent="DialogBox"]
+
+[node name="Portrait" type="Sprite2D" parent="DialogBox"]
+z_index = -1
+position = Vector2(32, -48)
+scale = Vector2(3, 3)
+texture = ExtResource("1_csm77")

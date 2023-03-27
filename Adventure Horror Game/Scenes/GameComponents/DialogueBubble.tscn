@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://duom5xmofthx2"]
+
+[ext_resource type="Texture2D" uid="uid://c7og1uu2ke5fl" path="res://Sprites/DialogueBubble.png" id="1_00jra"]
+
+[sub_resource type="Animation" id="Animation_tlahd"]
+resource_name = "Indicator"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(320, 72), Vector2(320, 69)]
+}
+
+[sub_resource type="Animation" id="Animation_a7m5c"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pxxql"]
+_data = {
+"Indicator": SubResource("Animation_tlahd"),
+"RESET": SubResource("Animation_a7m5c")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -480.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogBubble" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("1_00jra")
+stretch_mode = 2
+
+[node name="Text" type="RichTextLabel" parent="DialogBubble"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 59.0
+offset_bottom = 27.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 5
+bbcode_enabled = true
+text = "Text"
+
+[node name="Indicator" type="Polygon2D" parent="DialogBubble"]
+position = Vector2(106.667, 24)
+scale = Vector2(0.333333, 0.333333)
+color = Color(0.807843, 0.0352941, 0.54902, 1)
+polygon = PackedVector2Array(0, 16, 8, 8, -8, 8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogBubble/Indicator"]
+libraries = {
+"": SubResource("AnimationLibrary_pxxql")
+}
+
+[node name="Timer" type="Timer" parent="DialogBubble"]
