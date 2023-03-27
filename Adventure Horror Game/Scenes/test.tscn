@@ -150,7 +150,6 @@ grow_horizontal = 2
 
 [node name="Player" parent="." instance=ExtResource("2_3uuok")]
 position = Vector2(236, 142)
-interacting = false
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 script = ExtResource("5_37kt8")
