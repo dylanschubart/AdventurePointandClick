@@ -1,35 +1,97 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnmrawfsklmac"]
+[gd_scene load_steps=9 format=3 uid="uid://bnmrawfsklmac"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_3q6fq"]
-[ext_resource type="Texture2D" uid="uid://imj5uy182yb1" path="res://Sprites/BearkShopkeeper/BearkShopkeeper/Bear/Bear_Idle1.png" id="2_lusjn"]
+[ext_resource type="Texture2D" uid="uid://djsohbiqgi0x6" path="res://Sprites/Player/Player.png" id="2_c2e4x"]
 [ext_resource type="PackedScene" uid="uid://duom5xmofthx2" path="res://Scenes/GameComponents/DialogueBubble.tscn" id="3_8g5qs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sad0c"]
-radius = 2.0
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_fjakr"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_l2ck4"]
+resource_name = "PickingUp"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_4grsi"]
+resource_name = "Walking"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2wjpw"]
+_data = {
+"Idle": SubResource("Animation_fjakr"),
+"PickingUp": SubResource("Animation_l2ck4"),
+"Walking": SubResource("Animation_4grsi")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3q6fq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -13)
-scale = Vector2(2, 2)
-texture = ExtResource("2_lusjn")
+position = Vector2(1, -30)
+texture = ExtResource("2_c2e4x")
+hframes = 4
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -5)
 shape = SubResource("CircleShape2D_sad0c")
 
 [node name="InteractionComponent" type="Node2D" parent="."]
 position = Vector2(1, -13)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 5.0
 target_desired_distance = 5.0
-avoidance_enabled = true
 
 [node name="DialogueBubble" parent="." instance=ExtResource("3_8g5qs")]
-offset_left = -26.0
-offset_top = -65.0
-offset_right = -26.0
-offset_bottom = -65.0
+offset_left = -33.0
+offset_top = -96.0
+offset_right = -33.0
+offset_bottom = -96.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2wjpw")
+}
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

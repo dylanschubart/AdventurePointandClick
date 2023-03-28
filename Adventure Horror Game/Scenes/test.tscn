@@ -17,12 +17,12 @@ size = Vector2(10, 9)
 [node name="Test" type="Node2D"]
 
 [node name="Environment" parent="." instance=ExtResource("1_74owe")]
-position = Vector2(180, 166)
+position = Vector2(13, 187)
 
 [node name="Interactions" type="Node" parent="."]
 
 [node name="Interactable_Bone" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(232, 176)
+position = Vector2(413, 157)
 Interact_Name = "Bone"
 Interact_label = "Bone"
 Interact_Type = "use"
@@ -49,7 +49,7 @@ offset_bottom = 19.0
 grow_horizontal = 2
 
 [node name="Interactable_Duck" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(208, 142)
+position = Vector2(389, 123)
 Interact_Name = "Duck"
 Interact_label = "Duck"
 Interact_Type = "pickup"
@@ -72,7 +72,7 @@ anchor_right = 0.5
 grow_horizontal = 2
 
 [node name="Interactable_candle" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(197, 126)
+position = Vector2(378, 107)
 Interact_Name = "Candle"
 Interact_label = "Candle"
 Interact_Type = "use"
@@ -96,7 +96,7 @@ offset_right = 22.0
 grow_horizontal = 2
 
 [node name="Interactable_Note2" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(176, 136)
+position = Vector2(357, 117)
 Interact_Name = "Note"
 Interact_label = "Note"
 Interact_Type = "DialogueBubble"
@@ -122,7 +122,7 @@ offset_bottom = 19.0
 grow_horizontal = 2
 
 [node name="Interactable_Clock" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(284, 65)
+position = Vector2(465, 46)
 Interact_Name = "Clock"
 Interact_label = "Clock"
 Interact_Type = "DialogueBox"
@@ -149,7 +149,7 @@ offset_bottom = 19.0
 grow_horizontal = 2
 
 [node name="Player" parent="." instance=ExtResource("2_3uuok")]
-position = Vector2(236, 142)
+position = Vector2(95, 128)
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 script = ExtResource("5_37kt8")

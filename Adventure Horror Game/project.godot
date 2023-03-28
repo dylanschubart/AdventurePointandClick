@@ -48,8 +48,7 @@ RightMouseClick={
 [navigation]
 
 2d/default_cell_size=16
-2d/default_edge_connection_margin=8
-2d/default_link_connection_radius=1
+2d/default_edge_connection_margin=16
 
 [rendering]
 
