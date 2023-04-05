@@ -16,3 +16,4 @@ func initialize_inventory():
 	for i in range(slots.size()):
 		if PlayerInventory.inventory.has(i):
 			slots[i].initialize_item(PlayerInventory.inventory[i]["name"])
+

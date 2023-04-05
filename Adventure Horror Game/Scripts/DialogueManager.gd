@@ -2,9 +2,9 @@ extends Node
 
 
 
-func showDialogueBox(interactable):
+func showDialogueBox(dialoguepath):
 	var dialogueBox = get_tree().root.get_node("/root/Test/UserInterface/DialogueBox/DialogueBox")
-	dialogueBox.dialogPath = interactable.Interact_Value
+	dialogueBox.dialogPath = dialoguepath
 	dialogueBox.start()
 
 func showDialogueBubble(dialoguepath):

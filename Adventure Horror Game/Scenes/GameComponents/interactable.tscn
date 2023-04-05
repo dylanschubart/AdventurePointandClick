@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsjm6oni2s1e0"]
+[gd_scene load_steps=3 format=3 uid="uid://t7ayq0f6p51y"]
 
-[ext_resource type="Script" path="res://Scripts/Interactable.gd" id="1_hb4nj"]
+[ext_resource type="Script" path="res://Scripts/InteractableExamine.gd" id="1_svngw"]
+[ext_resource type="FontFile" uid="uid://by5dwbq2nomha" path="res://Fonts/Nanum_Pen_Script/NanumPenScript-Regular.ttf" id="2_7w0gn"]
 
 [node name="Interactable" type="Area2D" groups=["interactable"]]
-script = ExtResource("1_hb4nj")
+script = ExtResource("1_svngw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -16,6 +17,8 @@ frame = 11
 offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_7w0gn")
+theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true

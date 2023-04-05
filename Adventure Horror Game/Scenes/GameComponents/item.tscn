@@ -6,6 +6,3 @@
 script = ExtResource("1_1k1gl")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 16.0
-offset_bottom = 16.0
-stretch_mode = 2

@@ -1,8 +1,8 @@
 extends Panel
 
-var default_tex = preload("res://Sprites/DefaultSlot.png")
-var empty_tex = preload("res://Sprites/EmptySlot.png")
-var active_tex = preload("res://Sprites/ActiveSlot.png")
+var default_tex = preload("res://Sprites/UI/DefaultSlot.png")
+var empty_tex = preload("res://Sprites/UI/EmptySlot.png")
+var active_tex = preload("res://Sprites/UI/ActiveSlot.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null
@@ -31,8 +31,10 @@ func refresh_style():
 		set('theme_override_styles/panel', default_style)
 
 func slot_gui_input(_event):
-		if Input.is_action_just_pressed("LeftMouseClick"):
+		if Input.is_action_just_pressed("LeftMouseClick") and PlayerInventory.active_item == null:
 			PlayerInventory.select_item(slot_index)
+		elif Input.is_action_just_pressed("LeftMouseClick") and PlayerInventory.active_item:
+			PlayerInventory.combine_item(slot_index)
 		if Input.is_action_just_pressed("RightMouseClick"):
 			PlayerInventory.examine_item(slot_index)
 			
@@ -54,5 +56,4 @@ func initialize_item(Interact_Name):
 func removeFromSlot():
 	remove_child(item)
 	item = null
-	print(item)
 	refresh_style()

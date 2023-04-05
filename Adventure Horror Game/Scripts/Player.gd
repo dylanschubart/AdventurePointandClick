@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const speed = 100.0
+const speed = 400.0
 var target = Vector2.ZERO
 
 var interactable_object
@@ -10,7 +10,7 @@ var pickingUP:bool
 @export var interacting = false
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var useItemSprite = $"../useItemSprite"
+@onready var useItemSprite = $"../UserInterface/useItemSprite"
 
 func _ready():
 	pass
@@ -46,7 +46,7 @@ func _physics_process(_delta):
 		$AnimationPlayer.play("Idle")
 		if interactable_object == null:
 			return
-		if position.distance_to(interactable_object.position) < 50 and interacting:
+		if position.distance_to(interactable_object.position) < 300 and interacting:
 			execute(interactable_object)
 			interacting = false
 			interactable_object.Marker.hide()
@@ -57,8 +57,12 @@ func _physics_process(_delta):
 			
 func execute(interactable_object):
 	match interactable_object.Interact_Type:
-		"print_text" : print(interactable_object.Interact_Value)
-		"pickup" : PlayerInventory.add_item(interactable_object) and $AnimationPlayer.play("PickingUp")
-		"use" : PlayerInventory.use_Item(interactable_object)
-		"DialogueBox" : DialogueManager.showDialogueBox(interactable_object)
-		"DialogueBubble" : DialogueManager.showDialogueBubble(interactable_object.Examine_Text)
+		"Examine" : 
+			interactable_object.Examine()
+		"Pickup" : 
+			interactable_object.Pickup()
+			$AnimationPlayer.play("PickingUp")
+		"Use" : 
+			PlayerInventory.use_Item(interactable_object)
+		"Receive" : 
+			interactable_object.Receive()

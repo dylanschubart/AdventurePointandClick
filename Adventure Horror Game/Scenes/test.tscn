@@ -1,117 +1,135 @@
-[gd_scene load_steps=10 format=3 uid="uid://pnwofaq61h2v"]
+[gd_scene load_steps=22 format=3 uid="uid://bxwe57hje8ylb"]
 
-[ext_resource type="PackedScene" uid="uid://bielcixa5wuup" path="res://Scenes/environment.tscn" id="1_74owe"]
+[ext_resource type="Texture2D" uid="uid://c4o640x48wm5m" path="res://Sprites/Environment/Kitchen.png" id="1_twx2e"]
 [ext_resource type="PackedScene" uid="uid://bnmrawfsklmac" path="res://Scenes/GameComponents/player.tscn" id="2_3uuok"]
-[ext_resource type="PackedScene" uid="uid://dsjm6oni2s1e0" path="res://Scenes/GameComponents/interactable.tscn" id="3_y8dh5"]
-[ext_resource type="Texture2D" uid="uid://b5583mh4ii6lt" path="res://Sprites/TopDownHouse_SmallItems.png" id="4_25811"]
+[ext_resource type="Script" path="res://Scenes/GameComponents/InteractableReceive.gd" id="3_7hsbi"]
+[ext_resource type="Texture2D" uid="uid://n2pjxycm5xsb" path="res://Sprites/Items/Trashcan.png" id="3_u02vv"]
+[ext_resource type="PackedScene" uid="uid://t7ayq0f6p51y" path="res://Scenes/GameComponents/interactable.tscn" id="3_y8dh5"]
+[ext_resource type="Texture2D" uid="uid://i2b2m7rjleg2" path="res://Sprites/Items/Toy.png" id="4_qdk8x"]
 [ext_resource type="Script" path="res://Scripts/UserInterface.gd" id="5_37kt8"]
-[ext_resource type="PackedScene" uid="uid://vlfa0umhjtky" path="res://Scenes/GameComponents/inventory.tscn" id="5_ucsgv"]
+[ext_resource type="Script" path="res://Scenes/GameComponents/InteractablePickup.gd" id="5_43ebw"]
+[ext_resource type="PackedScene" uid="uid://balqifmqnqcfu" path="res://Scenes/GameComponents/inventory.tscn" id="5_ucsgv"]
+[ext_resource type="Texture2D" uid="uid://dd2s6kvpyn6gh" path="res://Sprites/Items/Drawing.png" id="6_6kjqu"]
 [ext_resource type="PackedScene" uid="uid://c6xmrmvm3ncx3" path="res://Scenes/GameComponents/DialogueBox.tscn" id="7_5x1gc"]
+[ext_resource type="Script" path="res://Scenes/GameComponents/InteractableUse.gd" id="7_tswjk"]
+[ext_resource type="Texture2D" uid="uid://dm3ghdde1ehly" path="res://Sprites/Items/Pliers.png" id="8_t1kby"]
+[ext_resource type="Texture2D" uid="uid://dcr2ymo1cc0mw" path="res://Sprites/Items/ShelfStanding.png" id="9_3qo7m"]
+[ext_resource type="Texture2D" uid="uid://cs6axd7ech1my" path="res://Sprites/Items/Hammer.png" id="11_6nsie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc3wl"]
+size = Vector2(108, 170.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j44ea"]
+size = Vector2(69, 94.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_velaq"]
-size = Vector2(19, 18)
+size = Vector2(58, 22)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg3wj"]
-size = Vector2(10, 9)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0hef"]
+size = Vector2(246, 516)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ugppo"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_re8uu"]
+vertices = PackedVector2Array(1871, 694, 1866, 641, 1919, 639, 1915, 1076, 1608, 692, 2, 1069, 2, 877, 1284, 699, 357, 634, 643, 637, 641, 696, 1284, 635, 1602, 635)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5, 6, 7), PackedInt32Array(8, 9, 10, 6), PackedInt32Array(7, 11, 12, 4), PackedInt32Array(10, 7, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(641, 696, 643, 637, 357, 634, 2, 877, 2, 1069, 1915, 1076, 1919, 639, 1866, 641, 1871, 694, 1608, 692, 1602, 635, 1284, 635, 1284, 699)])
 
 [node name="Test" type="Node2D"]
 
-[node name="Environment" parent="." instance=ExtResource("1_74owe")]
-position = Vector2(13, 187)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_twx2e")
 
 [node name="Interactions" type="Node" parent="."]
 
-[node name="Interactable_Bone" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(413, 157)
-Interact_Name = "Bone"
-Interact_label = "Bone"
-Interact_Type = "use"
-Interact_Value = "res://ExamineText/UseDoesntWork.json"
-Examine_Text = "res://ExamineText/Bone.json"
+[node name="Interactable_Trash" parent="Interactions" instance=ExtResource("3_y8dh5")]
+position = Vector2(542, 606)
+script = ExtResource("3_7hsbi")
+ReceiveItemName = "Ball"
+ReceiveItemDescription = "small bouncy Ball"
+Interact_Name = "Trash"
+Examine_Text = "res://ExamineText/Trash.json"
+firstInteraction_Text = "res://ExamineText/TrashFirstInteraction.json"
+firstInteraction = true
 
-[node name="CollisionShape2D" parent="Interactions/Interactable_Bone" index="0"]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_velaq")
+[node name="CollisionShape2D" parent="Interactions/Interactable_Trash" index="0"]
+position = Vector2(4, 5.25)
+shape = SubResource("RectangleShape2D_lc3wl")
 
-[node name="Sprite2D" parent="Interactions/Interactable_Bone" index="1"]
-position = Vector2(-0.5, -3)
-texture = ExtResource("4_25811")
-frame = 16
+[node name="Sprite2D" parent="Interactions/Interactable_Trash" index="1"]
+y_sort_enabled = true
+position = Vector2(409, -78)
+texture = ExtResource("3_u02vv")
+hframes = 1
+vframes = 1
+frame = 0
 
-[node name="Label" parent="Interactions/Interactable_Bone" index="2"]
+[node name="Label" parent="Interactions/Interactable_Trash" index="2"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -19.5
-offset_top = -4.0
-offset_right = 20.5
-offset_bottom = 19.0
+offset_left = -17.0
+offset_top = 4.0
+offset_right = 23.0
+offset_bottom = 27.0
 grow_horizontal = 2
 
-[node name="Interactable_Duck" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(389, 123)
-Interact_Name = "Duck"
-Interact_label = "Duck"
-Interact_Type = "pickup"
-Interact_Value = "Ducky is my friend"
-Examine_Text = "res://ExamineText/Duck.json"
+[node name="Interactable_Toy" parent="Interactions" instance=ExtResource("3_y8dh5")]
+position = Vector2(334, 865)
+script = ExtResource("7_tswjk")
+Used_Item = "Hammer"
+Use_Dialogue = "res://ExamineText/ToyUse.json"
+Didnt_Use_Dialogue = "res://ExamineText/ToyNotUsed.json"
+ReceiveItemName = "Spring"
+ReceiveItemDescription = "rusty spring"
+Interact_Name = "Toy"
+Examine_Text = "res://ExamineText/Toy.json"
+firstInteraction_Text = "res://ExamineText/ToyFirstInteraction.json"
+firstInteraction = true
 
-[node name="CollisionShape2D" parent="Interactions/Interactable_Duck" index="0"]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_lg3wj")
+[node name="CollisionShape2D" parent="Interactions/Interactable_Toy" index="0"]
+position = Vector2(-37.5, -1.625)
+shape = SubResource("RectangleShape2D_j44ea")
 
-[node name="Sprite2D" parent="Interactions/Interactable_Duck" index="1"]
-position = Vector2(0, -2.5)
-texture = ExtResource("4_25811")
-frame = 4
+[node name="Sprite2D" parent="Interactions/Interactable_Toy" index="1"]
+y_sort_enabled = true
+position = Vector2(122, -244)
+texture = ExtResource("4_qdk8x")
+hframes = 1
+vframes = 1
+frame = 0
 
-[node name="Label" parent="Interactions/Interactable_Duck" index="2"]
+[node name="Label" parent="Interactions/Interactable_Toy" index="2"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
+offset_left = -63.0
+offset_top = 49.0
+offset_right = -23.0
+offset_bottom = 72.0
 grow_horizontal = 2
 
-[node name="Interactable_candle" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(378, 107)
-Interact_Name = "Candle"
-Interact_label = "Candle"
-Interact_Type = "use"
-Interact_Value = "res://ExamineText/UseDoesntWork.json"
-Examine_Text = "res://ExamineText/Candle.json"
+[node name="Interactable_Pliers" parent="Interactions" instance=ExtResource("3_y8dh5")]
+visible = false
+position = Vector2(1079, 825)
+script = ExtResource("5_43ebw")
+Item_Description = "some old Pliers"
+Interact_Name = "Pliers"
+Examine_Text = "res://ExamineText/Pliers.json"
 
-[node name="CollisionShape2D" parent="Interactions/Interactable_candle" index="0"]
+[node name="CollisionShape2D" parent="Interactions/Interactable_Pliers" index="0"]
+position = Vector2(0.5, -6)
 shape = SubResource("RectangleShape2D_velaq")
 
-[node name="Sprite2D" parent="Interactions/Interactable_candle" index="1"]
+[node name="Sprite2D" parent="Interactions/Interactable_Pliers" index="1"]
 position = Vector2(-1, -3)
-texture = ExtResource("4_25811")
-frame = 26
+texture = ExtResource("8_t1kby")
+hframes = 1
+vframes = 1
+frame = 0
 
-[node name="Label" parent="Interactions/Interactable_candle" index="2"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -18.0
-offset_right = 22.0
-grow_horizontal = 2
-
-[node name="Interactable_Note2" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(357, 117)
-Interact_Name = "Note"
-Interact_label = "Note"
-Interact_Type = "DialogueBubble"
-Interact_Value = "res://ExamineText/Note.json"
-Examine_Text = "res://ExamineText/Note.json"
-
-[node name="CollisionShape2D" parent="Interactions/Interactable_Note2" index="0"]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_velaq")
-
-[node name="Sprite2D" parent="Interactions/Interactable_Note2" index="1"]
-position = Vector2(-0.5, -3)
-texture = ExtResource("4_25811")
-
-[node name="Label" parent="Interactions/Interactable_Note2" index="2"]
+[node name="Label" parent="Interactions/Interactable_Pliers" index="2"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -121,24 +139,91 @@ offset_right = 20.5
 offset_bottom = 19.0
 grow_horizontal = 2
 
-[node name="Interactable_Clock" parent="Interactions" instance=ExtResource("3_y8dh5")]
-position = Vector2(465, 46)
-Interact_Name = "Clock"
-Interact_label = "Clock"
-Interact_Type = "DialogueBox"
-Interact_Value = "res://Dialogue/Dialog1.json"
-Examine_Text = "res://ExamineText/Clock.json"
+[node name="Interactable_Drawing" parent="Interactions" instance=ExtResource("3_y8dh5")]
+position = Vector2(1064, 814)
+script = ExtResource("5_43ebw")
+Item_Description = "Tom's drawing"
+Interact_Name = "Drawing"
+Examine_Text = "res://Dialogue/Drawing.json"
+DialogueBox = true
 
-[node name="CollisionShape2D" parent="Interactions/Interactable_Clock" index="0"]
-position = Vector2(-1.5, -4)
+[node name="CollisionShape2D" parent="Interactions/Interactable_Drawing" index="0"]
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_velaq")
 
-[node name="Sprite2D" parent="Interactions/Interactable_Clock" index="1"]
+[node name="Sprite2D" parent="Interactions/Interactable_Drawing" index="1"]
+y_sort_enabled = true
+position = Vector2(-266, -350)
+texture = ExtResource("6_6kjqu")
+hframes = 1
+vframes = 1
+frame = 0
+
+[node name="Label" parent="Interactions/Interactable_Drawing" index="2"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -10.0
+offset_top = 25.0
+offset_right = 30.0
+offset_bottom = 48.0
+grow_horizontal = 2
+
+[node name="Interactable_Shelf" parent="Interactions" instance=ExtResource("3_y8dh5")]
+position = Vector2(1776, 550)
+script = ExtResource("7_tswjk")
+Used_Item = "Ball"
+Use_Dialogue = "res://ExamineText/ShelfUse.json"
+Didnt_Use_Dialogue = "res://ExamineText/ShelfNotUsed.json"
+ReceiveItemName = "null"
+ReceiveItemDescription = "null"
+Interact_Name = "Shelf"
+Examine_Text = "res://ExamineText/Shelf.json"
+firstInteraction_Text = "res://Dialogue/Shelf.json"
+firstInteraction = true
+firstInteractionDialogueBox = true
+DialogueBox = true
+
+[node name="CollisionShape2D" parent="Interactions/Interactable_Shelf" index="0"]
+position = Vector2(-35, -123)
+shape = SubResource("RectangleShape2D_c0hef")
+
+[node name="Sprite2D" parent="Interactions/Interactable_Shelf" index="1"]
+position = Vector2(1, 2)
+texture = ExtResource("9_3qo7m")
+hframes = 1
+vframes = 1
+frame = 0
+
+[node name="Label" parent="Interactions/Interactable_Shelf" index="2"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.0
+offset_top = -138.0
+offset_right = -5.0
+offset_bottom = -103.0
+grow_horizontal = 2
+
+[node name="Interactable_Hammer" parent="Interactions" instance=ExtResource("3_y8dh5")]
+position = Vector2(1666, 177)
+script = ExtResource("5_43ebw")
+Item_Description = "Hammer"
+Interact_Name = "Hammer"
+Examine_Text = "res://ExamineText/Hammer.json"
+
+[node name="CollisionShape2D" parent="Interactions/Interactable_Hammer" index="0"]
+position = Vector2(4, -6)
+shape = SubResource("RectangleShape2D_velaq")
+
+[node name="Sprite2D" parent="Interactions/Interactable_Hammer" index="1"]
 position = Vector2(-1, -3)
-texture = ExtResource("4_25811")
-frame = 13
+texture = ExtResource("11_6nsie")
+hframes = 1
+vframes = 1
+frame = 0
 
-[node name="Label" parent="Interactions/Interactable_Clock" index="2"]
+[node name="Label" parent="Interactions/Interactable_Hammer" index="2"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -146,37 +231,78 @@ offset_left = -19.5
 offset_top = -4.0
 offset_right = 20.5
 offset_bottom = 19.0
+grow_horizontal = 2
+
+[node name="Interactable_Door" parent="Interactions" instance=ExtResource("3_y8dh5")]
+position = Vector2(1463, 713)
+script = ExtResource("7_tswjk")
+Used_Item = "SpringKey"
+Use_Dialogue = "res://ExamineText/DoorUse.json"
+Didnt_Use_Dialogue = "res://ExamineText/DoorNotUsed.json"
+ReceiveItemName = "null"
+ReceiveItemDescription = "null"
+Interact_Name = "Door"
+Examine_Text = "res://ExamineText/Door.json"
+firstInteraction_Text = "res://Dialogue/Shelf.json"
+
+[node name="CollisionShape2D" parent="Interactions/Interactable_Door" index="0"]
+position = Vector2(-4, -315.75)
+shape = SubResource("RectangleShape2D_c0hef")
+
+[node name="Sprite2D" parent="Interactions/Interactable_Door" index="1"]
+position = Vector2(-483, -177)
+hframes = 1
+vframes = 1
+frame = 0
+
+[node name="Label" parent="Interactions/Interactable_Door" index="2"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_top = -278.0
+offset_right = 19.0
+offset_bottom = -243.0
 grow_horizontal = 2
 
 [node name="Player" parent="." instance=ExtResource("2_3uuok")]
-position = Vector2(95, 128)
+z_index = 1
+position = Vector2(1188, 822)
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 script = ExtResource("5_37kt8")
 
 [node name="Inventory" parent="UserInterface" instance=ExtResource("5_ucsgv")]
-offset_left = 160.0
-offset_top = 248.0
-offset_right = 160.0
-offset_bottom = 248.0
+offset_left = 28.0
+offset_top = 1.0
+offset_right = 28.0
+offset_bottom = 1.0
+mouse_filter = 0
 
 [node name="DialogueBox" parent="UserInterface" instance=ExtResource("7_5x1gc")]
+visible = false
+
+[node name="useItemSprite" type="Sprite2D" parent="UserInterface"]
+z_index = 1
+y_sort_enabled = true
 
 [node name="ItemMarker" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("4_25811")
+texture = SubResource("CompressedTexture2D_ugppo")
 hframes = 8
 vframes = 8
 frame = 18
 
-[node name="useItemSprite" type="Sprite2D" parent="."]
-position = Vector2(236, 142)
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_re8uu")
 
 [connection signal="mouse_entered" from="UserInterface/Inventory" to="UserInterface" method="_on_inventory_mouse_entered"]
 [connection signal="mouse_exited" from="UserInterface/Inventory" to="UserInterface" method="_on_inventory_mouse_exited"]
 
-[editable path="Interactions/Interactable_Bone"]
-[editable path="Interactions/Interactable_Duck"]
-[editable path="Interactions/Interactable_candle"]
-[editable path="Interactions/Interactable_Note2"]
-[editable path="Interactions/Interactable_Clock"]
+[editable path="Interactions/Interactable_Trash"]
+[editable path="Interactions/Interactable_Toy"]
+[editable path="Interactions/Interactable_Pliers"]
+[editable path="Interactions/Interactable_Drawing"]
+[editable path="Interactions/Interactable_Shelf"]
+[editable path="Interactions/Interactable_Hammer"]
+[editable path="Interactions/Interactable_Door"]

@@ -9,25 +9,24 @@ var active_item = null
 var usingItem: bool
 
 var inventory = {
-	0: {"name":"Duck", "ExamineText":"TestDuck"},
-	1: {"name":"Note", "ExamineText":"TestNote"}
+#	0: {"name":"Pliers", "DescriptionText":"TestDuck"},
+#	1: {"name":"Hammer", "DescriptionText":"TestNote"},
+#	2: {"name":"Spring", "DescriptionText":"Spring"}
 }
 
-func add_item(Interactable):
+func add_item(Name, DescriptionText):
 	for i in range(NUM_INVENTORY_SLOTS):
 		if inventory.has(i) == false:
-			inventory[i] = {"name" : Interactable.Interact_Name, "ExamineText": Interactable.Examine_Text}
-			Interactable.queue_free()
-			DialogueManager.showDialogueBubble(Interactable.Examine_Text)
+			inventory[i] = {"name" : Name, "DescriptionText": DescriptionText}
 			return
 
 func remove_item(slotIndex):
 	var slot = get_tree().root.get_node("/root/Test/UserInterface/Inventory/GridContainer/Slot" + str(slotIndex + 1))
 	inventory.erase(slotIndex)
+	slot.removeFromSlot()
 	usingItem = false
 	active_item_slot = null
 	active_item = null
-	slot.removeFromSlot()
 	
 func select_item(index):
 	if index in inventory:
@@ -37,6 +36,23 @@ func select_item(index):
 	else:
 		return
 
+func combine_item(index):
+	match active_item["name"]:
+		"Pliers":	
+			if inventory[index]["name"] == "Spring": 
+				inventory[index] = {"name" : "SpringKey", "DescriptionText": "DescriptionText"}
+				remove_item(active_item_slot) 
+				active_item_slot = null
+				active_item = null
+				usingItem = false
+		"Spring": 
+			if inventory[index]["name"] == "Pliers": 
+				inventory[index] = {"name" : "SpringKey", "DescriptionText": "DescriptionText"}
+				remove_item(active_item_slot)
+				active_item_slot = null
+				active_item = null
+				usingItem = false
+
 func unselect_item():
 	active_item_slot = null
 	active_item = null
@@ -44,23 +60,18 @@ func unselect_item():
 
 func use_Item(interactable_object):
 	if active_item == null:
-		DialogueManager.showDialogueBubble(interactable_object.Examine_Text)
+		interactable_object.Examine()
 	else:
 		match interactable_object.Interact_Name:
-			"Candle" : interactable_object.candle(active_item["name"],interactable_object, active_item_slot)
-			"Bone" : interactable_object.bone(active_item["name"],interactable_object, active_item_slot)
+			"Shelf" : interactable_object.Shelf(active_item["name"],interactable_object, active_item_slot)
+			"Toy" : interactable_object.Toy(active_item["name"],interactable_object, active_item_slot)
+			"Door" : interactable_object.Door(active_item["name"],interactable_object, active_item_slot)
 
 func examine_item(index):
 	var examineItemText
 	var label = get_tree().root.get_node("/root/Test/UserInterface/Inventory/Label")
 	if index in inventory:
-		examineItemText = inventory[index]["ExamineText"]
+		examineItemText = inventory[index]["DescriptionText"]
 		label.text = examineItemText
 	else:
 		return
-
-func array_to_string(arr: Array) -> String:
-	var s = ""
-	for i in arr:
-		s += String(i)
-	return s

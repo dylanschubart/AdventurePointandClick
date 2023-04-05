@@ -1,23 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://vlfa0umhjtky"]
+[gd_scene load_steps=7 format=3 uid="uid://balqifmqnqcfu"]
 
-[ext_resource type="Texture2D" uid="uid://duoccjsgxjsp7" path="res://Sprites/InventoryBG.png" id="1_u3ury"]
 [ext_resource type="Script" path="res://Scripts/inventory.gd" id="1_vpsit"]
-[ext_resource type="Texture2D" uid="uid://5gl3enq68u35" path="res://Sprites/EmptySlot.png" id="3_novtl"]
+[ext_resource type="Texture2D" uid="uid://dktkcj5eiubnh" path="res://Sprites/UI/InventoryBG.png" id="2_wriyy"]
 [ext_resource type="Script" path="res://Scripts/Slot.gd" id="4_u0t21"]
+[ext_resource type="FontFile" uid="uid://by5dwbq2nomha" path="res://Fonts/Nanum_Pen_Script/NanumPenScript-Regular.ttf" id="5_51wro"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ib8f0"]
+load_path = "res://.godot/imported/EmptySlot.png-6cbd2cbcfbacc5d026a7ef5d0a995dcf.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7s8by"]
-texture = ExtResource("3_novtl")
+texture = SubResource("CompressedTexture2D_ib8f0")
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("1_vpsit")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 128.0
-offset_bottom = 16.0
-texture = ExtResource("1_u3ury")
+offset_left = 277.0
+offset_top = 929.0
+offset_right = 1597.0
+offset_bottom = 1076.0
+texture = ExtResource("2_wriyy")
 stretch_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -25,10 +31,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 18.0
+offset_left = 415.0
+offset_top = 943.0
+offset_right = 1519.0
+offset_bottom = 1083.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 2
@@ -36,57 +42,75 @@ theme_override_constants/v_separation = 0
 columns = 7
 
 [node name="Slot1" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(150, 140)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_7s8by")
 script = ExtResource("4_u0t21")
 
 [node name="Slot2" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(150, 140)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_7s8by")
 script = ExtResource("4_u0t21")
 
 [node name="Slot3" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(150, 140)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_7s8by")
 script = ExtResource("4_u0t21")
 
 [node name="Slot4" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(150, 140)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_7s8by")
 script = ExtResource("4_u0t21")
 
 [node name="Slot5" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(150, 140)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_7s8by")
 script = ExtResource("4_u0t21")
 
 [node name="Slot6" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(150, 140)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_7s8by")
 script = ExtResource("4_u0t21")
 
 [node name="Slot7" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(150, 140)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_7s8by")
 script = ExtResource("4_u0t21")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1.0
-offset_top = -23.0
-offset_right = 121.0
-text = "Description:"
+offset_left = 360.0
+offset_top = 909.0
+offset_right = 480.0
+offset_bottom = 947.0
+theme_override_fonts/font = ExtResource("5_51wro")
+theme_override_font_sizes/font_size = 30
+text = "
+"

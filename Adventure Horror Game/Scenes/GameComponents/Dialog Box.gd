@@ -59,7 +59,6 @@ func nextPhrase() -> void:
 	
 	var f = FileAccess.open(dialogPath,FileAccess.READ)
 	var img = "res://Sprites/Portraits/" + dialog[phraseNum]["Name"] + dialog[phraseNum]["Emotion"] + ".png"
-	print(img)
 	if f.file_exists(img):
 		$Portrait.texture = load(img)
 	else: $Portrait.texture = null
