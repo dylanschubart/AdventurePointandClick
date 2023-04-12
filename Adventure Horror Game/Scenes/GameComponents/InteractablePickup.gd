@@ -11,7 +11,7 @@ func Pickup():
 	PlayerInventory.add_item(Interact_Name, Item_Description)
 	queue_free()
 	if Interact_Name == "Drawing":
-		var pliers = get_tree().root.get_node("/root/Test/Interactions/Interactable_Pliers")
+		var pliers = get_tree().root.get_node("/root/World/Kitchen/Interactions/Interactable_Pliers")
 		pliers.show()
 	else:
 		return

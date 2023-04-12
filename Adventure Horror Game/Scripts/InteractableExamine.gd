@@ -11,9 +11,9 @@ var Interact_Type = "none"
 var current_interaction
 
 @onready var InteractLabel = $Label
-@onready var Player = $"../../Player"
-@onready var Marker = $"../../ItemMarker"
-@onready var Inventory = $"../../UserInterface/Inventory"
+@onready var Player = $"../../../Player"
+@onready var Marker = $"../../../ItemMarker"
+@onready var Inventory = $"../../../UserInterface/Inventory"
 
 func _ready():
 	Interact_Type = "Examine"

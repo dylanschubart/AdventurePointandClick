@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm4dtme3gnowk"]
+
+[ext_resource type="Texture2D" uid="uid://c4o640x48wm5m" path="res://Sprites/Environment/Kitchen.png" id="1_mhe28"]
+[ext_resource type="Script" path="res://Scenes/StartMenu.gd" id="1_rv0an"]
+[ext_resource type="FontFile" uid="uid://by5dwbq2nomha" path="res://Fonts/Nanum_Pen_Script/NanumPenScript-Regular.ttf" id="2_ugdvs"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rv0an")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.278431, 0.278431, 0.278431, 1)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_mhe28")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -86.5
+offset_right = 57.0
+offset_bottom = 86.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ugdvs")
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ugdvs")
+theme_override_font_sizes/font_size = 40
+text = "Options"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ugdvs")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

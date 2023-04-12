@@ -11,7 +11,7 @@ var usingItem: bool
 var inventory = {
 #	0: {"name":"Pliers", "DescriptionText":"TestDuck"},
 #	1: {"name":"Hammer", "DescriptionText":"TestNote"},
-#	2: {"name":"Spring", "DescriptionText":"Spring"}
+	0: {"name":"SpringKey", "DescriptionText":"Spring"}
 }
 
 func add_item(Name, DescriptionText):
@@ -21,7 +21,7 @@ func add_item(Name, DescriptionText):
 			return
 
 func remove_item(slotIndex):
-	var slot = get_tree().root.get_node("/root/Test/UserInterface/Inventory/GridContainer/Slot" + str(slotIndex + 1))
+	var slot = get_tree().root.get_node("/root/World/UserInterface/Inventory/GridContainer/Slot" + str(slotIndex + 1))
 	inventory.erase(slotIndex)
 	slot.removeFromSlot()
 	usingItem = false
@@ -61,6 +61,8 @@ func unselect_item():
 func use_Item(interactable_object):
 	if active_item == null:
 		interactable_object.Examine()
+	elif interactable_object.unlocked == true:
+		interactable_object.Teleport()
 	else:
 		match interactable_object.Interact_Name:
 			"Shelf" : interactable_object.Shelf(active_item["name"],interactable_object, active_item_slot)
@@ -69,7 +71,7 @@ func use_Item(interactable_object):
 
 func examine_item(index):
 	var examineItemText
-	var label = get_tree().root.get_node("/root/Test/UserInterface/Inventory/Label")
+	var label = get_tree().root.get_node("/root/World/UserInterface/Inventory/Label")
 	if index in inventory:
 		examineItemText = inventory[index]["DescriptionText"]
 		label.text = examineItemText

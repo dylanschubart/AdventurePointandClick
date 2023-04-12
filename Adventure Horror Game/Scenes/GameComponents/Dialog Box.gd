@@ -2,7 +2,7 @@ extends ColorRect
 
 @export var dialogPath = ""
 @export var textSpeed = 0.05
-@onready var player = get_tree().root.get_node("/root/Test/Player")
+@onready var player = get_tree().root.get_node("/root/World/Player")
 
 var dialog
  
