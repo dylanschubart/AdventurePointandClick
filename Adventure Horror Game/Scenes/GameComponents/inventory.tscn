@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/inventory.gd" id="1_vpsit"]
 [ext_resource type="Texture2D" uid="uid://dktkcj5eiubnh" path="res://Sprites/UI/InventoryBG.png" id="2_wriyy"]
+[ext_resource type="Texture2D" uid="uid://0278s3ulsw7o" path="res://Sprites/UI/DefaultSlot.png" id="3_vekac"]
 [ext_resource type="Script" path="res://Scripts/Slot.gd" id="4_u0t21"]
 [ext_resource type="FontFile" uid="uid://by5dwbq2nomha" path="res://Fonts/Nanum_Pen_Script/NanumPenScript-Regular.ttf" id="5_51wro"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ib8f0"]
-load_path = "res://.godot/imported/EmptySlot.png-6cbd2cbcfbacc5d026a7ef5d0a995dcf.ctex"
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7s8by"]
-texture = SubResource("CompressedTexture2D_ib8f0")
+texture = ExtResource("3_vekac")
 
 [node name="Inventory" type="Control"]
 layout_mode = 3

@@ -59,10 +59,15 @@ func unselect_item():
 	usingItem = false
 
 func use_Item(interactable_object):
-	if active_item == null:
-		interactable_object.Examine()
-	elif interactable_object.unlocked == true:
-		interactable_object.Teleport()
+	if interactable_object.get("unlocked"):
+		if active_item == null and interactable_object.unlocked == false:
+			interactable_object.Examine()
+		elif active_item == null and interactable_object.unlocked == true:
+			interactable_object.Teleport()
+		elif interactable_object.unlocked == false:
+			interactable_object.Examine()
+		elif !interactable_object.get("unlocked") and active_item == null:
+			interactable_object.Examine()
 	else:
 		match interactable_object.Interact_Name:
 			"Shelf" : interactable_object.Shelf(active_item["name"],interactable_object, active_item_slot)
