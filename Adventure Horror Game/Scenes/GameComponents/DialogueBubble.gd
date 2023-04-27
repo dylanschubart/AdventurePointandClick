@@ -27,7 +27,6 @@ func getDialog() -> Array:
 	var json_object = JSON.new()
 	json_object.parse(f.get_as_text())
 	var output = json_object.get_data()
-	print(output)
 	
 	if typeof(output) == TYPE_ARRAY:
 		return output

@@ -6,3 +6,4 @@
 script = ExtResource("1_1k1gl")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+mouse_default_cursor_shape = 2

@@ -24,7 +24,7 @@ func start():
 	
 func _process(_delta):
 	$Indicator.visible = finished
-	if Input.is_action_just_pressed("RightMouseClick"):
+	if Input.is_action_just_pressed("LeftMouseClick"):
 		if finished:
 			nextPhrase()
 		else:
@@ -37,7 +37,6 @@ func getDialog() -> Array:
 	var json_object = JSON.new()
 	json_object.parse(f.get_as_text())
 	var output = json_object.get_data()
-	print(output)
 	
 	if typeof(output) == TYPE_ARRAY:
 		return output

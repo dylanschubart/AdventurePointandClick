@@ -38,11 +38,6 @@ func slot_gui_input(_event):
 		if Input.is_action_just_pressed("RightMouseClick"):
 			PlayerInventory.examine_item(slot_index)
 			
-func slot_mouse_entered():
-	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-
-func slot_mouse_exited():
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func initialize_item(Interact_Name):
 	if item == null:

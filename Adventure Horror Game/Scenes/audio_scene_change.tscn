@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2am0521w5rk6"]
+
+[ext_resource type="AudioStream" uid="uid://dnaumvppopuoe" path="res://Audio/Horror Ambiance (Royalty Free).mp3" id="1_1tdbl"]
+
+[node name="AudioSceneChange" type="Node"]
+
+[node name="StartMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_1tdbl")
+autoplay = true
+bus = &"Music"

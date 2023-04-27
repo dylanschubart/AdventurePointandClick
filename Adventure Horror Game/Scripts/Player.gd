@@ -12,6 +12,7 @@ var pickingUP:bool
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var useItemSprite = $"../UserInterface/useItemSprite"
 
+
 func _ready():
 	pass
 	$AnimationPlayer.play("Idle")
@@ -20,7 +21,7 @@ func _physics_process(_delta):
 	
 	if Input.is_action_just_pressed("RightMouseClick"):
 		PlayerInventory.unselect_item()
-		
+	
 	if PlayerInventory.usingItem == true:
 		var active_Item = PlayerInventory.active_item
 		useItemSprite.texture = load("res://Sprites/item_icons/" + active_Item["name"] + ".png")
@@ -32,7 +33,7 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("LeftMouseClick") and !in_inventory and !dialogueActive:
 		target = get_global_mouse_position()
 		navigation_agent.set_target_position(target)
-		navigation_agent.set_debug_enabled(true)
+#		navigation_agent.set_debug_enabled(true)
 		
 	if navigation_agent.distance_to_target() > 2 and !navigation_agent.is_navigation_finished():
 		var dir = navigation_agent.get_next_path_position() - position
@@ -42,7 +43,7 @@ func _physics_process(_delta):
 		
 	elif !pickingUP:
 		velocity = Vector2.ZERO
-		navigation_agent.set_debug_enabled(false)
+#		navigation_agent.set_debug_enabled(false)
 		$AnimationPlayer.play("Idle")
 		if interactable_object == null:
 			return

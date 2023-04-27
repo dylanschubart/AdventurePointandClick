@@ -6,14 +6,15 @@ class_name InteractableExamine extends Area2D
 @export var firstInteraction: bool
 @export var firstInteractionDialogueBox: bool
 @export var DialogueBox: bool
+@export var SoundEffect: AudioStreamPlayer
 
 var Interact_Type = "none"
 var current_interaction
 
 @onready var InteractLabel = $Label
-@onready var Player = $"../../../Player"
-@onready var Marker = $"../../../ItemMarker"
-@onready var Inventory = $"../../../UserInterface/Inventory"
+@onready var Player = get_tree().get_root().get_node("/root/World/Player")
+@onready var Marker = get_tree().get_root().get_node("/root/World/ItemMarker")
+@onready var Inventory = get_tree().get_root().get_node("/root/World/UserInterface/Inventory")
 
 func _ready():
 	Interact_Type = "Examine"
@@ -23,7 +24,7 @@ func _on_mouse_entered():
 	InteractLabel.text = Interact_Name
 	$Label.show()
 	current_interaction = self
-
+	
 func _on_mouse_exited():
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	InteractLabel.text = ""

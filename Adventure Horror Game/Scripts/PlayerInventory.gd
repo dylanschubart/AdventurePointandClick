@@ -8,17 +8,24 @@ var active_item_slot = null
 var active_item = null
 var usingItem: bool
 
+var startInventory = {
+	0: {"name":"SpringKey", "DescriptionText":"Spring"}
+}
 var inventory = {
 #	0: {"name":"Pliers", "DescriptionText":"TestDuck"},
 #	1: {"name":"Hammer", "DescriptionText":"TestNote"},
-	0: {"name":"SpringKey", "DescriptionText":"Spring"}
+#	0: {"name":"SpringKey", "DescriptionText":"Spring"}
 }
-
+	
 func add_item(Name, DescriptionText):
 	for i in range(NUM_INVENTORY_SLOTS):
 		if inventory.has(i) == false:
 			inventory[i] = {"name" : Name, "DescriptionText": DescriptionText}
+			SaveSystem.Inventory = inventory
+			SaveSystem.save_game()
+			print(SaveSystem.Inventory)
 			return
+	
 
 func remove_item(slotIndex):
 	var slot = get_tree().root.get_node("/root/World/UserInterface/Inventory/GridContainer/Slot" + str(slotIndex + 1))
@@ -27,6 +34,9 @@ func remove_item(slotIndex):
 	usingItem = false
 	active_item_slot = null
 	active_item = null
+	SaveSystem.Inventory = inventory
+	print(SaveSystem.Inventory)
+	SaveSystem.save_game()
 	
 func select_item(index):
 	if index in inventory:
@@ -45,6 +55,9 @@ func combine_item(index):
 				active_item_slot = null
 				active_item = null
 				usingItem = false
+				SaveSystem.Inventory = inventory
+				print(SaveSystem.Inventory)
+				SaveSystem.save_game()
 		"Spring": 
 			if inventory[index]["name"] == "Pliers": 
 				inventory[index] = {"name" : "SpringKey", "DescriptionText": "DescriptionText"}
@@ -52,6 +65,9 @@ func combine_item(index):
 				active_item_slot = null
 				active_item = null
 				usingItem = false
+				SaveSystem.Inventory = inventory
+				print(SaveSystem.Inventory)
+				SaveSystem.save_game()
 
 func unselect_item():
 	active_item_slot = null
@@ -59,14 +75,12 @@ func unselect_item():
 	usingItem = false
 
 func use_Item(interactable_object):
-	if interactable_object.get("unlocked"):
-		if active_item == null and interactable_object.unlocked == false:
+	if "unlocked" in interactable_object and active_item == null:
+		if interactable_object.unlocked == false:
 			interactable_object.Examine()
-		elif active_item == null and interactable_object.unlocked == true:
+		elif interactable_object.unlocked == true:
 			interactable_object.Teleport()
-		elif interactable_object.unlocked == false:
-			interactable_object.Examine()
-		elif !interactable_object.get("unlocked") and active_item == null:
+	elif active_item == null:
 			interactable_object.Examine()
 	else:
 		match interactable_object.Interact_Name:
